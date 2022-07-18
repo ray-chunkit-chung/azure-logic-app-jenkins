@@ -109,3 +109,10 @@ az login --service-principal --username appID --password PASSWORD --tenant tenan
 ```
 az ad sp create-for-rbac --name $ServicePrincipalName --role contributor --scopes /subscriptions/$SUBSCRIPTION_ID
 ```
+
+
+# Checkgin this for git tag
+
+https://github.com/terradatum/jenkins-pipeline-library/blob/master/src/com/terradatum/jenkins/workflow/TerradatumCommands.groovy#L276
+
+https://www.garybell.co.uk/creating-a-release-with-gitlab-ci-and-composer/
