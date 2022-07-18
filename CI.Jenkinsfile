@@ -37,7 +37,7 @@ pipeline {
       steps {
         script {
           input(
-            message: 'Should we proceed??',
+            message: 'Should we proceed?',
             ok: 'Proceed'
           )
         }
@@ -45,9 +45,11 @@ pipeline {
     }
     stage('artifacts') {
       steps {
-        sshagent (credentials: ['github-ray-chunkit-chung']) {
+        sshagent(credentials: ['github-ray-chunkit-chung']) {
           sh 'git tag -f latest'
           sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin latest'
         }
+      }
     }
+  }
 }
