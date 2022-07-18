@@ -26,7 +26,8 @@ pipeline {
         echo 'prepare for tests'
         echo 'pip install --upgrade -r requirement'
         sh "chmod +x -R ${env.WORKSPACE}"
-        sh 'az group create --location ${params.LOCATION} --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME}'
+        sh "echo ${params.RESOURCEGROUP_NAME}"
+        sh "az group create --location ${params.LOCATION} --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME}"
       }
     }
     stage('test') {
