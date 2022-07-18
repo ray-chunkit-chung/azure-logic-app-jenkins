@@ -2,6 +2,25 @@
 azure logic app to track new file upload to one drive. If new, add an Azure queue
 
 
+
+# Env parameters
+in .env file
+```
+# Deploy infra parameters
+export SUBSCRIPTION_ID=foo-bar-foo-foo-bar
+export SUBSCRIPTION_NAME=foo-bar-foo-foo-bar
+export RESOURCEGROUP_NAME=foo-bar-foo-foo-bar
+export LOCATION=eastus
+export WEB_APP_NAME=foo-bar-foo-foo-bar
+export CUSTOM_DOMAIN_VERIFICATION_ID=foo-bar-foo-foo-bar
+
+# Deploy artifact parameters
+export DOCKER_USERNAME=raychung
+
+# App parameters
+export WEBSITES_PORT=12345
+```
+
 # Getting started
 
 
