@@ -32,11 +32,6 @@ pipeline {
       steps {
         echo 'build'
         // sh "chmod +x -R ${env.WORKSPACE}"
-        // withCredentials([
-        //   usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
-        // ]) {
-        //   sh "az login -u ${user} -p ${pwd}"
-        // }
         withCredentials([
           usernamePassword(credentialsId: 'azure-service-principal', usernameVariable: 'user', passwordVariable: 'pwd')
         ]) {
