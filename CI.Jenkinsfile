@@ -21,15 +21,15 @@ pipeline {
         sh 'ls -lat'
       }
     }
-    // stage('build') {
-    //   steps {
-    //     sh 'pip install -r requirements.txt'
-    //   }
-    // }
-    // stage('test') {
-    //   steps {
-    //     sh 'python test.py'
-    //   }
-    // }
+    stage('build') {
+      steps {
+        sh 'echo pip install -r requirements.txt'
+      }
+    }
+    stage('test') {
+      steps {
+        sh 'echo python test.py'
+      }
+    }
   }
 }
