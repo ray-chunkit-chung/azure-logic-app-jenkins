@@ -37,7 +37,7 @@ pipeline {
       steps {
         script {
           input(
-            message: 'Should we proceed?',
+            message: 'Should we proceed??',
             ok: 'Proceed'
           )
         }
