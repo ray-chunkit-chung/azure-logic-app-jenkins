@@ -13,6 +13,13 @@ pipeline {
   // Generate deployable artifacts
   // Report status
   ////////////////////////////////////////////////
+
+  environment {
+      LOCATION = 'test1'
+      RESOURCEGROUP_NAME = 'test2'
+      SUBSCRIPTION_NAME = 'test3'
+  }
+
   stages {
     stage('checkout') {
       steps {
@@ -25,8 +32,12 @@ pipeline {
       steps {
         echo 'prepare for tests'
         echo 'pip install --upgrade -r requirement'
-        sh "chmod +x -R ${env.WORKSPACE}"
-        sh 'az login'
+        // sh "chmod +x -R ${env.WORKSPACE}"
+        withCredentials([
+          usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
+        ]) {
+          sh 'az login -u user -p pwd'
+        }
         sh "az group create --location ${params.LOCATION} \
                             --name ${params.RESOURCEGROUP_NAME} \
                             --subscription ${params.SUBSCRIPTION_NAME}"
@@ -35,7 +46,6 @@ pipeline {
     stage('test') {
       steps {
         echo 'perform tests'
-        
         echo 'python tests.py'
       }
     }
