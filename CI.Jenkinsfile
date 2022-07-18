@@ -47,7 +47,7 @@ pipeline {
       steps {
         sshagent(credentials: ['github-ray-chunkit-chung']) {
           sh 'git tag -f latest'
-          sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin latest'
+          sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/dev latest'
         }
       }
     }
