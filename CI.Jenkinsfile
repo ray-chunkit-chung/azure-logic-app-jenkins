@@ -34,19 +34,22 @@ pipeline {
       }
     }
     stage('approval') {
-      input {
+      steps {
+        input {
           message 'Should we continue?'
           ok 'Yes, we should.'
           submitter 'developer name'
+          /* groovylint-disable-next-line NestedBlockDepth */
           parameters {
               string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
           }
+        }
       }
     }
     stage('artifacts') {
       steps {
-        git tag 'latest'
-        git push origin 'latest'
+        sh 'git tag latest'
+        sh 'git push origin latest'
       }
     }
   }
