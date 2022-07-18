@@ -36,11 +36,11 @@ pipeline {
         withCredentials([
           usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
         ]) {
-          sh "az login -u ${user} -p ${pwd}"
+          sh 'az login -u ${user} -p ${pwd}'
         }
-        sh "az group create --location ${params.LOCATION} \
+        sh 'az group create --location ${params.LOCATION} \
                             --name ${params.RESOURCEGROUP_NAME} \
-                            --subscription ${params.SUBSCRIPTION_NAME}"
+                            --subscription ${params.SUBSCRIPTION_NAME}'
       }
     }
     stage('test') {
