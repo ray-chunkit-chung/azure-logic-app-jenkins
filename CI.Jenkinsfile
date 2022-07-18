@@ -45,18 +45,9 @@ pipeline {
     }
     stage('artifacts') {
       steps {
-
-        withCredentials([sshUserPrivateKey(credentialsId: 'github-ray-chunkit-chung', keyFileVariable: 'SSH_KEY')]) {
-            sh 'echo ssh -i $SSH_KEY -l git -o StrictHostKeyChecking=no \\"\\$@\\" > ~./local_ssh.sh'
-            sh 'chmod +x ~./local_ssh.sh'
-            withEnv(['GIT_SSH=./local_ssh.sh']) {
-                git branch: 'dev',
-                    url: 'git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git'
-                sh 'git tag -f latest'
-                sh 'git push origin latest'
-            }
+        sshagent (credentials: ['github-ray-chunkit-chung']) {
+          sh 'git tag -f latest'
+          sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin latest'
         }
-      }
     }
-  }
 }
