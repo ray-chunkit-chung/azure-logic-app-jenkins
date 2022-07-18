@@ -26,7 +26,7 @@ pipeline {
         echo 'prepare for tests'
         echo 'pip install --upgrade -r requirement'
         sh "chmod +x -R ${env.WORKSPACE}"
-        sh 'script/create_resource_group.sh'
+        sh 'az group create --location ${params.LOCATION} --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME}'
       }
     }
     stage('test') {
