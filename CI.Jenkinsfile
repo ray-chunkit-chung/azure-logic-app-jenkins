@@ -30,8 +30,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        echo 'prepare for tests'
-        echo 'pip install --upgrade -r requirement'
+        echo 'build'
         // sh "chmod +x -R ${env.WORKSPACE}"
         // withCredentials([
         //   usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
@@ -46,10 +45,15 @@ pipeline {
         sh "az group create --location ${params.LOCATION} \
                             --name ${params.RESOURCEGROUP_NAME} \
                             --subscription ${params.SUBSCRIPTION_NAME}"
+        sh "az deployment group create --subscription ${params.SUBSCRIPTION_NAME} \
+                           --resource-group ${params.RESOURCEGROUP_NAME} \
+                           --template-file ArmTemplate/logicApp/httpGet/template.json"
       }
     }
     stage('test') {
       steps {
+        echo 'prepare for tests'
+        echo 'pip install --upgrade -r requirement'
         echo 'perform tests'
         echo 'python tests.py'
       }
