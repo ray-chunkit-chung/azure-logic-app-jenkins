@@ -73,5 +73,12 @@ pipeline {
         sh "yes | az group delete --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME} --yes"
       }
     }
+    // stage('Deploy to PROD') {
+    //     when { tag "release-*" }
+    //     steps {
+    //         echo 'Deploying only because this commit is tagged...'
+    //         sh 'make deploy'
+    //     }
+    // }
   }
 }
