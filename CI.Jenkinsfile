@@ -33,14 +33,24 @@ pipeline {
         echo 'prepare for tests'
         echo 'pip install --upgrade -r requirement'
         // sh "chmod +x -R ${env.WORKSPACE}"
+        // withCredentials([
+        //   usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
+        // ]) {
+        //   sh "az login -u ${user} -p ${pwd}"
+        // }
         withCredentials([
-          usernamePassword(credentialsId: 'azure-ray-chunkit-chung', usernameVariable: 'user', passwordVariable: 'pwd')
+          usernamePassword(credentialsId: 'azure-service-principal', usernameVariable: 'user', passwordVariable: 'pwd')
         ]) {
-          sh 'az login -u ${user} -p ${pwd}'
+          sh 'az login --service-principal -u ${user} -p ${pwd} --tenant ${params.TENANT_ID}'
         }
         sh 'az group create --location ${params.LOCATION} \
                             --name ${params.RESOURCEGROUP_NAME} \
                             --subscription ${params.SUBSCRIPTION_NAME}'
+
+
+
+
+
       }
     }
     stage('test') {

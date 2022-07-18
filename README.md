@@ -97,3 +97,7 @@ az logicapp start --subscription $SUBSCRIPTION_NAME \
 az group delete --name $RESOURCEGROUP_NAME
 ```
 
+
+
+# az login by service principal 
+https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli#4-sign-in-using-a-service-principal
