@@ -61,10 +61,11 @@ pipeline {
     }
     stage('artifacts') {
       steps {
-        sshagent(credentials: ['github-ray-chunkit-chung']) {
-          sh 'git tag -f latest'
-          sh 'git push -f git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/release latest'
-        }
+        // sshagent(credentials: ['github-ray-chunkit-chung']) {
+        //   sh 'git tag -f latest'
+        //   sh 'git push -f git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/release latest'
+        // }
+        echo 'push to artifacts'
       }
     }
   }
