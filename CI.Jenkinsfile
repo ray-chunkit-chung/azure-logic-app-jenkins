@@ -5,7 +5,7 @@ pipeline {
   }
 
   ////////////////////////////////////////////////
-  // When new changes in the code dev branch
+  // When new changes in the code release branch
   // Analyze the quality of the source code
   // Build
   // Execute all unit tests
@@ -16,7 +16,7 @@ pipeline {
   stages {
     stage('checkout') {
       steps {
-        git branch: 'dev',
+        git branch: 'release',
             url: 'https://github.com/ray-chunkit-chung/azure-logic-app-jenkins.git'
         sh 'ls -lat'
       }
@@ -47,7 +47,7 @@ pipeline {
       steps {
         sshagent(credentials: ['github-ray-chunkit-chung']) {
           sh 'git tag -f latest'
-          sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/dev latest'
+          sh 'git push git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/release latest'
         }
       }
     }
