@@ -41,7 +41,7 @@ pipeline {
         withCredentials([
           usernamePassword(credentialsId: 'azure-service-principal', usernameVariable: 'user', passwordVariable: 'pwd')
         ]) {
-          sh "az login --service-principal -u ${user} -p ${pwd} --tenant ${params.TENANT_ID}
+          sh "az login --service-principal -u ${user} -p ${pwd} --tenant ${params.TENANT_ID}"
         }
         sh "az group create --location ${params.LOCATION} \
                             --name ${params.RESOURCEGROUP_NAME} \
