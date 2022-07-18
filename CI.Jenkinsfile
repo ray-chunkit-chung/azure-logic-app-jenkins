@@ -24,26 +24,29 @@ pipeline {
     stage('build') {
       steps {
         echo 'prepare for tests'
-        echo 'npm install'
+        echo 'pip install --upgrade -r requirement'
       }
     }
     stage('test') {
       steps {
         echo 'perform tests'
-        echo 'npm test'
+        echo 'python tests.py'
       }
     }
-    input {
-        message 'Should we continue?'
-        ok 'Yes, we should.'
-        submitter 'developer name'
-        parameters {
-            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-        }
+    stage('approval') {
+      input {
+          message 'Should we continue?'
+          ok 'Yes, we should.'
+          submitter 'developer name'
+          parameters {
+              string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+          }
+      }
     }
     stage('artifacts') {
       steps {
-        echo 'save artifacts'
+        git tag 'latest'
+        git push origin 'latest'
       }
     }
   }
