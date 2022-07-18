@@ -25,6 +25,7 @@ pipeline {
       steps {
         echo 'prepare for tests'
         echo 'pip install --upgrade -r requirement'
+        sh 'script/create_resource_group.sh'
       }
     }
     stage('test') {
