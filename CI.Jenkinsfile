@@ -23,12 +23,27 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'echo pip install -r requirements.txt'
+        echo 'prepare for tests'
+        echo 'npm install'
       }
     }
     stage('test') {
       steps {
-        sh 'echo python test.py'
+        echo 'perform tests'
+        echo 'npm test'
+      }
+    }
+    input {
+        message 'Should we continue?'
+        ok 'Yes, we should.'
+        submitter 'developer name'
+        parameters {
+            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        }
+    }
+    stage('artifacts') {
+      steps {
+        echo 'save artifacts'
       }
     }
   }
