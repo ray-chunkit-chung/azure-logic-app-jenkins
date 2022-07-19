@@ -70,7 +70,7 @@ pipeline {
         //   sh 'git push -f git@github.com:ray-chunkit-chung/azure-logic-app-jenkins.git origin/release latest'
         // }
         echo 'push to artifacts'
-        sh "yes | az group delete --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME} --yes"
+        // sh "yes | az group delete --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME} --yes"
       }
     }
     stage('Deploy to PROD') {
