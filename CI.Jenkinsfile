@@ -63,7 +63,7 @@ pipeline {
         }
       }
     }
-    stage('artifacts') {
+    stage('package, tag version, and clean up review app') {
       steps {
         // sshagent(credentials: ['github-ray-chunkit-chung']) {
         //   sh 'git tag -f latest'
@@ -73,12 +73,25 @@ pipeline {
         sh "yes | az group delete --name ${params.RESOURCEGROUP_NAME} --subscription ${params.SUBSCRIPTION_NAME} --yes"
       }
     }
-    // stage('Deploy to PROD') {
-    //     when { tag "release-*" }
-    //     steps {
-    //         echo 'Deploying only because this commit is tagged...'
-    //         sh 'make deploy'
-    //     }
-    // }
+    stage('Deploy to PROD') {
+      when { tag "release-*" }
+      steps {
+        echo 'Deploying only because this commit is tagged...'
+        script {
+          // def params = input message: 'Message',
+          //               parameters: [
+          //                 choice(name: 'param1', choices: ['1', '2', '3', '4', '5'],description: 'description'),
+          //                 booleanParam(name: 'param2', defaultValue: true, description: 'description')
+          //               ]
+          // echo params['param1']
+          // echo params['param2']
+          env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
+                              parameters: [
+                                choice(name: 'RELEASE_SCOPE', choices: ['v1.0.0','v2.0.0','v3.0.0'], description: 'What is the release scope?')
+                              ]
+        }
+        echo "script/deploy_to_prod.sh using ${env.RELEASE_SCOPE}"
+      }
+    }
   }
 }
