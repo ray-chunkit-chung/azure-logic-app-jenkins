@@ -47,9 +47,9 @@ pipeline {
     }
     stage('test') {
       steps {
-        echo 'prepare for tests'
+        echo 'prepare for tests -- here can use whatever framework suitable: mockito, specflow, jest, pytest, etc....'
+        echo 'infra code do not care about language'
         echo 'pip install --upgrade -r requirement'
-        echo 'perform tests'
         echo 'python tests.py'
       }
     }
@@ -63,7 +63,7 @@ pipeline {
         }
       }
     }
-    stage('package, tag version, and clean up review app') {
+    stage('package & tag') {
       steps {
         // sshagent(credentials: ['github-ray-chunkit-chung']) {
         //   sh 'git tag -f latest'
