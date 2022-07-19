@@ -74,7 +74,7 @@ pipeline {
       }
     }
     stage('Deploy to PROD') {
-      when { tag "release-*" }
+      // when { tag "release-*" }
       steps {
         echo 'Deploying only because this commit is tagged...'
         script {
