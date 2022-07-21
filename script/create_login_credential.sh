@@ -9,5 +9,5 @@
 
 # Create a service principal for a resource group using a preferred name and role
 az ad sp create-for-rbac --name $ServicePrincipalName \
-                         --role Owner \
+                         --role Contributor \
                          --scopes /subscriptions/$SUBSCRIPTION_NAME/resourceGroups/$RESOURCEGROUP_NAME
